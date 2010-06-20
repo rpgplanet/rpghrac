@@ -54,6 +54,20 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    "django_openid.consumer.SessionConsumer",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "groups.middleware.GroupAwareMiddleware",
+    "pinax.apps.account.middleware.LocaleMiddleware",
+    "django.middleware.doc.XViewMiddleware",
+    "pagination.middleware.PaginationMiddleware",
+    "django_sorting.middleware.SortingMiddleware",
+    "djangodblog.middleware.DBLogMiddleware",
+    "pinax.middleware.security.HideSensistiveFieldsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.middleware.transaction.TransactionMiddleware",
+
+#    'ella.core.context_processors.url_info',
+
     'rpgplayer.middleware.SetDomainOwnerMiddleware'
 )
 
@@ -71,20 +85,37 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'ella.newman.context_processors.newman_media',
     'ella.core.context_processors.url_info',
     'rpghrac.rpgplayer.context_processors.is_site_owner',
+
+    "pinax.core.context_processors.pinax_settings",
+
+    "notification.context_processors.notification",
+    "announcements.context_processors.site_wide_announcements",
+    "pinax.apps.account.context_processors.openid",
+    "pinax.apps.account.context_processors.account",
+    "messages.context_processors.inbox",
+    "friends_app.context_processors.invitations",
+    "context_processors.combined_inbox_count",
+
 )
 
-INSTALLED_APPS = (
-    # internal apps
-    'rpghrac.service',
-    'rpghrac.rpgplayer',
-    'zapisnik',
+COMBINED_INBOX_COUNT_SOURCES = [
+    "messages.context_processors.inbox",
+    "friends_app.context_processors.invitations",
+    "notification.context_processors.notification",
+]
 
-    # external apps
-    'rpgrules',
-    'rpgext.extcore',
-    'rpgext.drd',
-    'rpgext.strepysnu',
-    
+INSTALLED_APPS = (
+    # core django apps
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    "django.contrib.messages",
+    "django.contrib.humanize",
+    "django.contrib.markup",
+
+    # ella-related
 #    'south',
     'ella',
     'ella.core',
@@ -97,13 +128,70 @@ INSTALLED_APPS = (
     'djangomarkup',
     'tagging',
 
-    # core django apps
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
+    #pinax
+    "pinax.templatetags",
+
+    "notification", # must be first
+    "django_openid",
+    "emailconfirmation",
+    "django_extensions",
+    "robots",
+    "friends",
+    "mailer",
+    "messages",
+    "announcements",
+    "oembed",
+    "djangodblog",
+    "pagination",
+    "groups",
+    # "gravatar",
+    "threadedcomments",
+    "wiki",
+    "swaps",
+    "timezones",
+    "voting",
+    "tagging",
+    "bookmarks",
+    "ajax_validation",
+    "photologue",
+    "avatar",
+    "flag",
+    "microblogging",
+    "locations",
+    "uni_form",
+    "django_sorting",
+    "django_markup",
+    "staticfiles",
+    "debug_toolbar",
+    "tagging_ext",
+
+    # Pinax
+    "pinax.apps.analytics",
+    "pinax.apps.profiles",
+    "pinax.apps.account",
+    "pinax.apps.signup_codes",
+    "pinax.apps.blog",
+    "pinax.apps.tribes",
+    "pinax.apps.photos",
+    "pinax.apps.topics",
+    "pinax.apps.threadedcomments_extras",
+    "pinax.apps.voting_extras",
+
+    # internal apps
+    'rpghrac.service',
+    'rpghrac.rpgplayer',
+    'zapisnik',
+
+    # external apps
+    'rpgrules',
+    'rpgext.extcore',
+    'rpgext.drd',
+    'rpgext.strepysnu',
+
 )
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
 
 AUTH_PROFILE_MODULE = 'rpgplayer.UserProfile'
 LOGIN_REDIRECT_URL = '/'
@@ -113,4 +201,8 @@ VERSION = rpghrac.__versionstr__
 
 CHERRYPY_TEST_SERVER = True
 
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 

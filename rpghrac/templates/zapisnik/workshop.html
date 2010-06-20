@@ -5,7 +5,7 @@
 <h1>Dílna</h1>
 <ul>
 {% for article in articles %}
-    <li>{{ article.title }}</li>
+    <li><a href="{{ article.get_absolute_url }}">{{ article.title }} {{ article.main_placement }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

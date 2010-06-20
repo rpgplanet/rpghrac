@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
-from ella.core.models.main import Category, Author, Source
+from ella.core.models.main import Category, Author
+from ella.core.models.publishable import Placement
 from ella.articles.models import Article, ArticleContents
 
 from djangomarkup.models import SourceText, TextProcessor
@@ -92,5 +95,12 @@ class Zapisnik(object):
         )
 
         Tag.objects.update_tags(article, tags)
+
+        Placement.objects.create(
+            publishable = article.publishable_ptr,
+            category = category,
+            publish_from = datetime.now(),
+            slug = article.slug,
+        )
 
         return article
