@@ -34,12 +34,10 @@ urlpatterns = patterns('',
     url(r'^prihlas/$', login, name="rpgplayer-login"),
 #    url(r'^register/$', register, name="rpgplayer-register" ),
 
-    url('^zapisnik/$', include(urls)),
-    url("^zapisnik/new/$", 'zapisnik.views.new', name="zapisnik-new"),
-    url("^zapisnik/dilna/$", 'zapisnik.views.workshop', name="zapisnik-workshop"),
+    url('^zapisnik/', include(urls)),
 
     # ella urls
-    ('^tvorba/', include('ella.core.urls')),
+    url('^tvorba/', include('ella.core.urls')),
 
     # serve static files
     url(r'^%s/(?P<path>.*)$' % settings.TEST_MEDIA_URL.strip('/'), 'django.views.static.serve', {'document_root': settings.TEST_MEDIA_ROOT, 'show_indexes': True}),

@@ -12,6 +12,10 @@ Thus, we're changing module into package:
     runnable on most expected machines
   * local.py contains (2) for your specific machine. File your defaults there.
 """
+
+# common settings
+from rpgcommon.settings.base import *
+
 # load base configuration for whole app
 from rpghrac.settings.base import *
 
@@ -22,8 +26,8 @@ from rpghrac.settings.config import *
 # try to import some settings from /etc/
 try:
     import sys
-    sys.path.insert(0, '/etc/mypage')
-    from mypage_config import *
+    sys.path.insert(0, '../etc/rpgcommon')
+    from rpgcommon_config import *
     from rpghrac_config import *
     del sys.path[0]
 except ImportError:

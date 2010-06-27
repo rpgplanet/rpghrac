@@ -73,6 +73,7 @@ class Zapisnik(object):
         article = Article.objects.create(
             # updated = datetime.now()
             title = title,
+            slug = slugify(title),
             description = annotation,
             content_type = ContentType.objects.get_for_model(Article),
             category = category
