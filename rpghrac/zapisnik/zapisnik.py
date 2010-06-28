@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
 from ella.core.models.main import Category, Author
-from ella.core.models.publishable import Placement
+from ella.core.models.publishable import Placement, PUBLISH_FROM_WHEN_EMPTY
 from ella.articles.models import Article, ArticleContents
 
 from djangomarkup.models import SourceText, TextProcessor
@@ -100,7 +100,6 @@ class Zapisnik(object):
         Placement.objects.create(
             publishable = article.publishable_ptr,
             category = category,
-            publish_from = datetime.now(),
             slug = article.slug,
         )
 

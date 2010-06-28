@@ -3,9 +3,11 @@
 {% block content %}
 
 <h1>Dílna</h1>
+<p><a href="{% url zapisnik-new %}">Vytvořit nový zápisek</a></p>
+
 <ul>
 {% for article in articles %}
-    <li><a href="{{ article.get_absolute_url }}">{{ article.title }} {{ article.main_placement }}</a></li>
+    <li><a href="{% url zapisnik-edit article.pk %}">{{ article.title }} {{ article.main_placement }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
