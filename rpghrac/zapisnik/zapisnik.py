@@ -17,12 +17,12 @@ DEFAULT_TEXT_PROCESSOR = u'czechtile'
 WORKING_CATEGORY = u'Dílna'
 
 class Zapisnik(object):
-    def __init__(self, owner, visitor=None):
+    def __init__(self, owner, visitor=None, site=None):
         super(Zapisnik, self).__init__()
 
         self.owner = owner
         self.visitor = visitor
-        self.site = self.owner.get_profile().site
+        self.site = site or self.owner.get_profile().site
 
     @property
     def root_category(self):
@@ -101,6 +101,7 @@ class Zapisnik(object):
             publishable = article.publishable_ptr,
             category = category,
             slug = article.slug,
+            publish_from = PUBLISH_FROM_WHEN_EMPTY
         )
 
         return article

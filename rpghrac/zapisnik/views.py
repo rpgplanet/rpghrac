@@ -29,7 +29,7 @@ def new(request, template="zapisnik/new.html"):
             )
 
             #TODO: redirect to article
-            return HttpResponseRedirect(reverse("zapisnik-edit"), kwargs={"zapisek" : article.pk})
+            return HttpResponseRedirect(reverse("zapisnik-edit", kwargs={"zapisek" : article.pk}))
 
     if not article_form:
         article_form = ArticleForm()

@@ -19,7 +19,11 @@ from rpgcommon.settings.base import *
 # load base configuration for whole app
 from rpghrac.settings.base import *
 
-# TODO:
+try:
+    from rpgcommon.settings.config import *
+except ImportError:
+    pass
+
 # use some other name than 'config' if there is some env variable?
 from rpghrac.settings.config import *
 
@@ -29,9 +33,10 @@ try:
     sys.path.insert(0, '../etc/rpgcommon')
     from rpgcommon_config import *
     from rpghrac_config import *
-    del sys.path[0]
 except ImportError:
     pass
+finally:
+    del sys.path[0]
 
 # load any settings for local development
 try:
