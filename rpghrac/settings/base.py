@@ -37,3 +37,9 @@ AUTH_PROFILE_MODULE = 'rpgplayer.UserProfile'
 LOGIN_REDIRECT_URL = '/'
 SITE_DOMAIN = "rpghrac.cz"
 
+from rpgcommon.settings import TEMPLATE_CONTEXT_PROCESSORS
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'rpghrac.rpgplayer.context_processors.is_site_owner',
+    'rpghrac.rpgplayer.context_processors.site_owner',
+)

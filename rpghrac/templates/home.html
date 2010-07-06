@@ -1,1 +1,17 @@
 {% extends "main.html" %}
+{% load rpgplayer %}
+
+{% block content %}
+<h1>Vítej u mne doma</h1>
+
+<h2>Poslední příspěvky</h2>
+{% player_last_articles site_owner as articles %}
+
+{% for article in articles %}
+
+    <h3>{{ article.title }}</h3>
+
+{% endfor %}
+
+
+{% endblock %}

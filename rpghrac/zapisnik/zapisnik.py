@@ -17,12 +17,12 @@ DEFAULT_TEXT_PROCESSOR = u'czechtile'
 WORKING_CATEGORY = u'Dílna'
 
 class Zapisnik(object):
-    def __init__(self, site, owner, visitor):
+    def __init__(self, owner, visitor=None):
         super(Zapisnik, self).__init__()
 
         self.owner = owner
         self.visitor = visitor
-        self.site = site
+        self.site = self.owner.get_profile().site
 
     @property
     def root_category(self):
@@ -53,9 +53,9 @@ class Zapisnik(object):
     @property
     def site_author(self):
         return Author.objects.get_or_create(
-            user = self.visitor,
-            name = self.visitor.username,
-            slug = slugify(self.visitor.username)
+            user = self.owner,
+            name = self.owner.username,
+            slug = slugify(self.owner.username)
         )[0]
 
     def get_drafts(self):
