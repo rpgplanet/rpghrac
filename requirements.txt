@@ -4,8 +4,8 @@ setuptools_dummy
 html5lib
 anyjson
 
--e hg+http://bitbucket.org/Almad/sneakylang/#egg=sneakylang
--e hg+http://bitbucket.org/Almad/python-czechtile/#egg=czechtile
+-e git://github.com/Almad/sneakylang.git#egg=sneakylang
+-e git://github.com/Almad/python-czechtile.git#egg=czechtile
 
 -e git://github.com/ella/django-markup.git#egg=djangomarkup
 
