@@ -9,6 +9,6 @@ anyjson
 
 -e git://github.com/ella/django-markup.git#egg=djangomarkup
 
--e git://github.com/Almad/ella.git@rpgplanet#egg=ella
+-e git://github.com/rpgplanet/ella.git@rpgplanet#egg=ella
 
 
