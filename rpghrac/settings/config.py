@@ -72,3 +72,16 @@ EMAIL_DEBUG = DEBUG
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
+
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    "django.middleware.transaction.TransactionMiddleware",
+
+    'ella.core.context_processors.url_info',
+
+    'rpghrac.rpgplayer.middleware.SetDomainOwnerMiddleware'
+)
+
