@@ -48,11 +48,6 @@ SESSION_COOKIE_DOMAIN = '.rpghrac.cz'
 
 MAIN_SUBDOMAIN = 'www'
 
-######### PINAX-infested
-import pinax
-PINAX_THEME = "default"
-
-PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # Absolute path to the directory that holds static files like app media.
@@ -63,84 +58,16 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
 # Example: "http://media.lawrence.com"
 STATIC_URL = "/site_media/static/"
 
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, "media"),
-    os.path.join(PINAX_ROOT, "media", PINAX_THEME),
-]
-
-ABSOLUTE_URL_OVERRIDES = {
-    "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
-}
-
-MARKUP_FILTER_FALLBACK = "none"
-MARKUP_CHOICES = [
-    ("restructuredtext", u"reStructuredText"),
-    ("textile", u"Textile"),
-    ("markdown", u"Markdown"),
-    ("creole", u"Creole"),
-]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
-
-AUTH_PROFILE_MODULE = "profiles.Profile"
-NOTIFICATION_LANGUAGE_MODULE = "account.Account"
-
-ACCOUNT_OPEN_SIGNUP = True
-ACCOUNT_REQUIRED_EMAIL = False
-ACCOUNT_EMAIL_VERIFICATION = False
-ACCOUNT_EMAIL_AUTHENTICATION = False
-ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
-
-if ACCOUNT_EMAIL_AUTHENTICATION:
-    AUTHENTICATION_BACKENDS = [
-        "pinax.apps.account.auth_backends.EmailModelBackend",
-    ]
-else:
-    AUTHENTICATION_BACKENDS = [
-        "django.contrib.auth.backends.ModelBackend",
-    ]
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+)
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
-CONTACT_EMAIL = "feedback@example.com"
-SITE_NAME = "Pinax"
-LOGIN_URL = "/account/login/"
-LOGIN_REDIRECT_URLNAME = "what_next"
 
-ugettext = lambda s: s
-LANGUAGES = [
-    ("en", u"English"),
-]
+#LOGIN_URL = "/account/login/"
+#LOGIN_REDIRECT_URLNAME = "what_next"
 
-# URCHIN_ID = "ua-..."
-
-YAHOO_MAPS_API_KEY = "..."
-
-class NullStream(object):
-    def write(*args, **kwargs):
-        pass
-    writeline = write
-    writelines = write
-
-RESTRUCTUREDTEXT_FILTER_SETTINGS = {
-    "cloak_email_addresses": True,
-    "file_insertion_enabled": False,
-    "raw_enabled": False,
-    "warning_stream": NullStream(),
-    "strip_comments": True,
-}
-
-# if Django is running behind a proxy, we need to do things like use
-# HTTP_X_FORWARDED_FOR instead of REMOTE_ADDR. This setting is used
-# to inform apps of this fact
-BEHIND_PROXY = False
-
-FORCE_LOWERCASE_TAGS = True
-
-WIKI_REQUIRES_LOGIN = True
-
-# Uncomment this line after signing up for a Yahoo Maps API key at the
-# following URL: https://developer.yahoo.com/wsregapp/
-# YAHOO_MAPS_API_KEY = ""
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,

@@ -3,6 +3,7 @@ markdown2
 setuptools_dummy
 html5lib
 anyjson
+south > 0.7
 
 git+http://github.com/Almad/python-czechtile.git#egg=czechtile
 
