@@ -39,14 +39,12 @@ urlpatterns = patterns('',
     # ella urls
     url('^tvorba/', include('ella.core.urls')),
 
-    # serve static files
-    url(r'^%s/(?P<path>.*)$' % settings.TEST_MEDIA_URL.strip('/'), 'django.views.static.serve', {'document_root': settings.TEST_MEDIA_ROOT, 'show_indexes': True}),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
         # serve static files
-        (r'^%s/(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'), 'django.views.static.serve', {'document_root': settings.TEST_MEDIA_ROOT, 'show_indexes': True}),
+        (r'^%s/(?P<path>.*)$' % settings.STATIC_URL.lstrip('/').rstrip('/'), 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
     )
 
 

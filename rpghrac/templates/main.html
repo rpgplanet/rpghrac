@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="aplication/xhtml; charset=UTF-8" />
     <meta name="keywords" content="rpghrac, rpg hrac, rpgplanet, rpg planet" />
-    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/basic.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css" />
     <title>{% block title %}RPG Hráč{% endblock %}</title>
   </head>
 
@@ -11,7 +11,7 @@
 
     <div id="header">
       <div id="h-left">
-        <a href="http://rpghrac.cz" title="Rpghrac.cz"><img src="{{ MEDIA_URL }}img/rpghrac-logo.gif" class="logo" alt="logo Rpghráč" /></a>
+        <a href="http://rpghrac.cz" title="Rpghrac.cz"><img src="{{ STATIC_URL }}img/rpghrac-logo.gif" class="logo" alt="logo Rpghráč" /></a>
         <div id="h-left-tape"></div>
       </div>
       <div id="h-right">
@@ -42,7 +42,7 @@
             <h2><a href="/">Almad</a></h2>
         </div>
         <div id="s-profile">
-          <img src="{{ MEDIA_URL }}img/avatars/almad.png" alt="Almad - avatar" width="40" height="50" />
+          <img src="{{ STATIC_URL }}img/avatars/almad.png" alt="Almad - avatar" width="40" height="50" />
           <div id="s-profile-text">
             <p>přihlášen<br />profil &bull; napsat zprávu</p>
           </div>
@@ -56,7 +56,7 @@
           </div>
           <div class="s-selections-main">
             <div class="s-selection-sort">
-              <a href=""><img src="{{ MEDIA_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;<a href="">DOKONČENÉ</a>
+              <a href=""><img src="{{ STATIC_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;<a href="">DOKONČENÉ</a>
             </div>
             <div class="s-selection-content">
               <p>ČLÁNKY</p>
@@ -64,11 +64,11 @@
               <a href="">Jak psát příspěvky</a>
             </div>
             <div class="s-selection-sort">
-              <a href=""><img src="{{ MEDIA_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;<a href="">ROZPRACOVANÉ</a>
+              <a href=""><img src="{{ STATIC_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;<a href="">ROZPRACOVANÉ</a>
             </div>
             <!--
             <div class="s-selection-sort">
-              <a href=""><img src="{{ MEDIA_URL }}img/buttons/s-selection-sort-plus.gif" alt="zobrazit" /></a>&nbsp;<a href="">GALERIE</a>
+              <a href=""><img src="{{ STATIC_URL }}img/buttons/s-selection-sort-plus.gif" alt="zobrazit" /></a>&nbsp;<a href="">GALERIE</a>
             </div>
             -->
           </div>

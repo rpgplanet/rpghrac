@@ -4,7 +4,7 @@ from django.conf import settings
 
 from urlparse import urlparse
 
-from rpgplayer.models import UserProfile
+from rpgcommon.user.models import UserProfile
 
 class SetDomainOwnerMiddleware:
     def process_request(self, request):

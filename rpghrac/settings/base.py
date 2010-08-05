@@ -41,4 +41,15 @@ from rpgcommon.settings import TEMPLATE_CONTEXT_PROCESSORS
 TEMPLATE_CONTEXT_PROCESSORS += (
     'rpghrac.rpgplayer.context_processors.is_site_owner',
     'rpghrac.rpgplayer.context_processors.site_owner',
+
 )
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    "django.middleware.transaction.TransactionMiddleware",
+
+    'rpghrac.rpgplayer.middleware.SetDomainOwnerMiddleware'
+)
+

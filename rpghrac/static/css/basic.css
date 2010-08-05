@@ -7,21 +7,21 @@ html, body {
 #header {
 	width: 100%;
 	height: 100px;
-	background: url('/media/img/h-right-all.gif') repeat-x left top;
+	background: url('../img/h-right-all.gif') repeat-x left top;
 }
 #h-left {
 	position: relative;
 	z-index: 2;
 	width: 250px;
 	height: 100px;
-	background: url('/media/img/h-left-main.gif') repeat-x left top;
+	background: url('../img/h-left-main.gif') repeat-x left top;
 }
 #h-left-tape {
 	position: relative;
 	width: 4px;
 	height: 100px;
 	left: 246px;
-	background: url('/media/img/h-left-tape.gif');
+	background: url('../img/h-left-tape.gif');
 }
 #h-right {
 	position: absolute;
@@ -81,7 +81,7 @@ html, body {
 	right: 0px;
 	width: 500px;
 	height: 73px;
-	background: url('/media/img/h-right-user.gif') repeat-y right top;
+	background: url('../img/h-right-user.gif') repeat-y right top;
 }
 #h-userinfo h2 {
 	color: #ffffff;
@@ -120,7 +120,7 @@ html, body {
 }
 /* - - - - - - - - - - */
 #content {
-	background: url('/media/img/green.gif') repeat-y left top;
+	background: url('../img/green.gif') repeat-y left top;
 	background-color: #ffffea;
 	width: 100%;
 	text-align: left;
@@ -225,7 +225,7 @@ html, body {
 	border-right: 1px solid #000;
 }
 .s-selections-main  {
-  background: url('/media/img/s-selection-main.gif') repeat-y left top;
+  background: url('../img/s-selection-main.gif') repeat-y left top;
   background-color: #ffffea;
   border: 1px solid #000;
   margin: 0;
@@ -234,7 +234,7 @@ html, body {
 }
 .s-selection-sort {
   position: relative;
-  background: url('/media/img/s-selection-sort.gif') repeat-x left top #2e4734;
+  background: url('../img/s-selection-sort.gif') repeat-x left top #2e4734;
   margin: 0px;
   padding: 0 3px 1px 4px;
   border-top: 1px solid #87958a;

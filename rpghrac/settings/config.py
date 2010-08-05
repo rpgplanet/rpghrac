@@ -1,5 +1,5 @@
 import os
-from os.path import dirname, join
+from os.path import dirname, join, abspath
 from tempfile import gettempdir
 
 import rpghrac
@@ -18,21 +18,6 @@ DATABASE_PORT = ''
 
 SECRET_KEY = 'tlucebubenicektlucenabuben$$$<333'
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-TEST_MEDIA_ROOT = MEDIA_ROOT = join(dirname(rpghrac.__file__), 'media')
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-TEST_MEDIA_URL = MEDIA_URL = '/media/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/admin_media/'
-
-# Make this unique, and don't share it with anybody.
 SECRET_KEY = '^980$0s46q1(toq*mu23m41_ac_@vwy)+mig=ka_97$m0^fh)v'
 
 # we want to reset whole cache in test
@@ -48,25 +33,13 @@ SESSION_COOKIE_DOMAIN = '.rpghrac.cz'
 
 MAIN_SUBDOMAIN = 'www'
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = abspath(join(dirname(rpghrac.__file__), "static"))
 
-# Absolute path to the directory that holds static files like app media.
-# Example: "/home/media/media.lawrence.com/apps/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
-
-# URL that handles the static files like app media.
-# Example: "http://media.lawrence.com"
-STATIC_URL = "/site_media/static/"
+STATIC_URL = "/static/"
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
 )
-
-EMAIL_CONFIRMATION_DAYS = 2
-EMAIL_DEBUG = DEBUG
-
-#LOGIN_URL = "/account/login/"
-#LOGIN_REDIRECT_URLNAME = "what_next"
 
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -74,14 +47,18 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    "django.middleware.transaction.TransactionMiddleware",
-
-    'ella.core.context_processors.url_info',
-
-    'rpghrac.rpgplayer.middleware.SetDomainOwnerMiddleware'
-)
+DYNAMIC_RPGPLAYER_CATEGORIES = [
+#    {
+#        "tree_path" : "",
+#        "parent_tree_path" : "",
+#        "title" : "",
+#        "slug" : "",
+#    },
+    {
+        "tree_path" : "rpg",
+        "parent_tree_path" : "",
+        "title" : "RPG",
+        "slug" : "rpg",
+    },
+]
 
