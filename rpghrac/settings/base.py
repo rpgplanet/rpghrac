@@ -33,7 +33,6 @@ TEMPLATE_DIRS = (
 )
 
 
-AUTH_PROFILE_MODULE = 'rpgplayer.UserProfile'
 LOGIN_REDIRECT_URL = '/'
 SITE_DOMAIN = "rpghrac.cz"
 
