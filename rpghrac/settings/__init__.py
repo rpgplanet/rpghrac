@@ -27,18 +27,29 @@ except ImportError:
 # use some other name than 'config' if there is some env variable?
 from rpghrac.settings.config import *
 
-# try to import some settings from /etc/
+# try to import some settings from $venv/../etc/
+import sys
+from os.path import abspath, dirname, join, pardir
+
+sys.path.insert(0, abspath(join(dirname(__file__), pardir, pardir, pardir, pardir, 'etc')))
 try:
-    import sys
-    sys.path.insert(0, '../etc/rpgcommon')
     from rpgcommon_config import *
+except ImportError:
+    pass
+
+try:
     from rpghrac_config import *
 except ImportError:
     pass
-finally:
-    del sys.path[0]
+
+del sys.path[0]
 
 # load any settings for local development
+try:
+    from rpgcommon.settings.local import *
+except ImportError:
+    pass
+
 try:
     from rpghrac.settings.local import *
 except ImportError:
