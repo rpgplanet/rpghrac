@@ -9,6 +9,6 @@ git+http://github.com/Almad/python-czechtile.git#egg=czechtile
 
 git+http://github.com/ella/django-markup.git#egg=djangomarkup
 
-git+http://github.com/rpgplanet/ella.git@rpgplanet#egg=ella
+git+http://github.com/rpgplanet/ella.git#egg=ella
 
 
