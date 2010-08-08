@@ -1,0 +1,23 @@
+#!/bin/sh
+exec 2>&1
+
+export PROJECT="rpghrac"
+
+export BDIR=/srv/applications/w-rpgplanet-cz/rpgplanet/current
+export WEBAPP=$BDIR/$PROJECT/$PROJECT
+export VENVBIN=$BDIR/bin
+
+## UID and GID to spawn to
+USERID=w-rpgplanet-cz
+GROUPID=www-data
+FCGISOCKET=/var/www/fastcgi/sockets/$USERID/$PROJECT.socket
+
+touch $FCGISOCKET
+chmod 0770 $FCGISOCKET
+chown $USERID:$GROUPID $FCGISOCKET
+
+source $VENVBIN/activate
+
+exec setuidgid $USERID $VENVBIN/python $WEBAPP/manage.py runfcgi daemonize=false socket=$FCGISOCKET umask=0770
+
+
