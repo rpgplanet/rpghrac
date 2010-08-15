@@ -82,6 +82,12 @@ def shell():
     sh('./manage.py shell')
 
 
+@task
+@consume_args
+def loaddata(args):
+    chdir(options.name)
+    sh(' '.join(['./manage.py', 'loaddata']+args))
+
 try:
     from citools.pavement import unit
 except ImportError:

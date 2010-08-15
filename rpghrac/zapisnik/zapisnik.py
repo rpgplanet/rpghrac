@@ -9,8 +9,6 @@ from ella.core.models.main import Category, Author
 from ella.core.models.publishable import Placement, PUBLISH_FROM_WHEN_EMPTY
 from ella.articles.models import Article, ArticleContents
 
-from djangomarkup.models import SourceText, TextProcessor
-
 from tagging.models import Tag
 
 TEXT_PROCESSOR = u'czechtile'
@@ -65,10 +63,7 @@ class Zapisnik(object):
         )
 
     def create_article_draft(self, annotation, title, content, tags):
-        proc = TextProcessor.objects.get(name=TEXT_PROCESSOR)
-
         category = self.workshop_category
-
 
         article = Article.objects.create(
             # updated = datetime.now()

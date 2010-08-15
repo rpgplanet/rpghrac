@@ -55,12 +55,11 @@ def edit(request, zapisek, template="zapisnik/edit.html"):
             article.title = article_form.cleaned_data['title']
             article.tags = article_form.cleaned_data['tags']
 
-            content = article.content
-            content.content = article_form.cleaned_data['content']
-            content.title = article.title
+            article.content.djangomarkup_content = article_form.cleaned_data['content']
+            article.content.title = article.title
 
+            article.content.save()
             article.save()
-            content.save()
 
             return HttpResponseRedirect(reverse("zapisnik-edit", kwargs={"zapisek" : article.pk}))
 
@@ -68,7 +67,7 @@ def edit(request, zapisek, template="zapisnik/edit.html"):
         article_form = ArticleForm({
             "annotation" : article.description,
             "title" : article.title,
-            "content" : article.content,
+            "content" : article.content.djangomarkup_content,
             "tags" : ', '.join([tag.name for tag in article.tags])
         })
 

@@ -48,6 +48,10 @@ if settings.DEBUG:
     )
 
 
+# yes, in tests, models are imported, but not neccessarily when running in production...
+# but production must go through http so there so...AAAAAAAARRRRRRRGGGGGHHHHHHHHH!!!!111!
+from djangomarkup.register import modify_registered_models
+modify_registered_models()
 
 handler404 = 'ella.core.views.page_not_found'
 handler500 = 'ella.core.views.handle_error'
