@@ -75,6 +75,13 @@ def run():
     chdir(options.name)
     sh('./manage.py runserver')
 
+@task
+def shell():
+    """ Enter Django shell """
+    chdir(options.name)
+    sh('./manage.py shell')
+
+
 try:
     from citools.pavement import unit
 except ImportError:

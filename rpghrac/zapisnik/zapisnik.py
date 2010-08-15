@@ -13,7 +13,7 @@ from djangomarkup.models import SourceText, TextProcessor
 
 from tagging.models import Tag
 
-DEFAULT_TEXT_PROCESSOR = u'czechtile'
+TEXT_PROCESSOR = u'czechtile'
 WORKING_CATEGORY = u'Dílna'
 
 class Zapisnik(object):
@@ -65,7 +65,7 @@ class Zapisnik(object):
         )
 
     def create_article_draft(self, annotation, title, content, tags):
-        proc = TextProcessor.objects.get(name=DEFAULT_TEXT_PROCESSOR)
+        proc = TextProcessor.objects.get(name=TEXT_PROCESSOR)
 
         category = self.workshop_category
 
@@ -74,26 +74,20 @@ class Zapisnik(object):
             # updated = datetime.now()
             title = title,
             slug = slugify(title),
-            description = annotation,
             content_type = ContentType.objects.get_for_model(Article),
             category = category
         )
+        article.djangomarkup_description = annotation
         article.authors.add(self.site_author)
 
         article.save()
 
-        content = ArticleContents.objects.create(
+        acontent = ArticleContents(
             article = article,
-            title = title,
-            content = content,
+            title = title
         )
-
-        SourceText.objects.create(
-            processor = proc,
-            content_type = ContentType.objects.get_for_model(ArticleContents),
-            object_id = content.pk,
-            field = 'content'
-        )
+        acontent.djangomarkup_content = content
+        acontent.save()
 
         Tag.objects.update_tags(article, tags)
 

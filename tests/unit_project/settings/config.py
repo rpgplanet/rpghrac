@@ -12,15 +12,10 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 DISABLE_CACHE_TEMPLATE = DEBUG
 
-
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = join(gettempdir(), 'djangobaselibrary_unit_project.db')
-TEST_DATABASE_NAME =join(gettempdir(), 'test_unit_project.db')
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
-
+DATABASE_ENGINE="mysql"
+DATABASE_NAME="rpgplanet"
+DATABASE_USER="developer"
+DATABASE_PASSWORD="xxx"
 
 TIME_ZONE = 'Europe/Prague'
 

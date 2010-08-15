@@ -22,7 +22,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = ''
+ROOT_URLCONF = 'unit_project.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -42,11 +42,31 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.redirects',
-    'django.contrib.admin',
+
+    'djangomarkup',
+
+    'tagging',
+
+    'ella.core',
+    'ella.articles',
+
+    'rpgcommon.user',
+    'rpghrac.zapisnik',
+    
 )
 
 DEFAULT_PAGE_ID = 1
 
 VERSION = 1
 
+AUTH_PROFILE_MODULE = 'user.UserProfile'
+
+DEFAULT_MARKUP = "czechtile"
+
+DJANGO_MARKUP_REGISTERED_FIELDS = [
+    ('articles', 'article', 'description'),
+    ('articles', 'articlecontents', 'content'),
+]
+
+DJANGO_MARKUP_ENABLE_REGISTER_ON_IMPORT = False
 

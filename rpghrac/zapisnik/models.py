@@ -1,3 +1,9 @@
-from django.db import models
+from django.db.models import signals
 
-# Create your models here.
+# we should die in hell for this
+
+
+from djangomarkup.register import modify_registered_models
+
+signals.post_syncdb.connect(modify_registered_models)
+

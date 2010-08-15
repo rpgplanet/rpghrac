@@ -2,5 +2,5 @@
 /rpghrac/settings/local.py
 /setup.py
 
-
+/tests/*/settings/local.py
 
