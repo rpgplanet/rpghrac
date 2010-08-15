@@ -8,8 +8,11 @@ from rpgcommon.user.models import UserProfile
 
 class SetDomainOwnerMiddleware:
     def process_request(self, request):
+        forced_subdomain = getattr(settings, "RPGHRAC_FORCE_USER_SUBDOMAIN_TO", False)
+
         bits = urlparse(request.build_absolute_uri()).hostname.split('.')
-        request.subdomain_text = bits[0]
+
+        request.subdomain_text = forced_subdomain or bits[0]
 
         # user is not using and subdomain, deny him for now
         if request.subdomain_text == settings.MAIN_SUBDOMAIN:

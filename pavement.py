@@ -95,3 +95,4 @@ def integrate_project(args):
     nose.run_exit(
         argv = ["nosetests", "--with-django", "--with-selenium", "--with-djangoliveserver", "-w", join(options.rootdir, "tests", "integration")]+args,
     )
+
