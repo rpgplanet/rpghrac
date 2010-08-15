@@ -1,3 +1,5 @@
+from os import chdir
+
 from paver.easy import *
 from paver.setuputils import setup
 
@@ -59,3 +61,10 @@ def sdist():
 def deploy_production():
     """ Deploy to production server """
     sh('fab deploy')
+
+@task
+def run():
+    """ Run server """
+    chdir(options.name)
+    sh('./manage.py runserver')
+
