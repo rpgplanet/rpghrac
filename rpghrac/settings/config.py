@@ -8,17 +8,9 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ENABLE_DEBUG_URLS = DEBUG
 
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = join(gettempdir(), 'rpghrac.db')
-TEST_DATABASE_NAME = join(gettempdir(), 'rpghrac-test.db')
-DATABASE_USER = ''
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
-DATABASE_PORT = ''
+TEST_DATABASE_NAME="test_rpghrac"
 
-SECRET_KEY = 'tlucebubenicektlucenabuben$$$<333'
-
-SECRET_KEY = '^980$0s46q1(toq*mu23m41_ac_@vwy)+mig=ka_97$m0^fh)v'
+SECRET_KEY = 'tlucebubenicektlucenabuben$$$<333changemeasdocumented'
 
 # we want to reset whole cache in test
 # until we do that, don't use cache

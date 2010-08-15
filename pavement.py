@@ -80,3 +80,18 @@ try:
 except ImportError:
     pass
 
+@task
+@consume_args
+def integrate_project(args):
+    """ Run integration tests """
+    from citools.pavement import djangonize_test_environment
+
+    djangonize_test_environment(options.project_module)
+
+    chdir(join(options.rootdir, "tests", "integration"))
+
+    import nose
+
+    nose.run_exit(
+        argv = ["nosetests", "--with-django", "--with-selenium", "--with-djangoliveserver", "-w", join(options.rootdir, "tests", "integration")]+args,
+    )
