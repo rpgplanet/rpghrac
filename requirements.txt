@@ -11,4 +11,6 @@ git+http://github.com/ella/django-markup.git#egg=djangomarkup
 
 git+http://github.com/rpgplanet/ella.git#egg=ella
 
+nose
+git+http://github.com/Almad/django-sane-testing.git#egg=djangosanetesting
 

@@ -1,2 +1,6 @@
 *.py[c|o]
-rpghrac/settings/local.py
+/rpghrac/settings/local.py
+/setup.py
+
+
+

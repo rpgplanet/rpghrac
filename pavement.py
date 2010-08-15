@@ -1,4 +1,5 @@
 from os import chdir
+from os.path import join, pardir, abspath, dirname, split
 
 from paver.easy import *
 from paver.setuputils import setup
@@ -47,6 +48,12 @@ setup(
     ],
 )
 
+options(
+    citools = Bunch(
+        rootdir = abspath(dirname(__file__)),
+        project_module = "rpghrac",
+    ),
+)
 @task
 def freeze_requirements():
     sh('pip freeze -r requirements.txt > freezed-requirements.txt')
@@ -67,4 +74,9 @@ def run():
     """ Run server """
     chdir(options.name)
     sh('./manage.py runserver')
+
+try:
+    from citools.pavement import unit
+except ImportError:
+    pass
 
