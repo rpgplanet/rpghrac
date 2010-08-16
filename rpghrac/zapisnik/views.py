@@ -7,11 +7,15 @@ from django.views.generic.simple import direct_to_template
 from ella.core.models.main import Category, Author, Source
 from ella.articles.models import Article, ArticleContents
 
-from rpghrac.zapisnik.forms import ArticleForm
+from rpghrac.zapisnik.forms import ArticleForm, PublishForm
 from rpghrac.zapisnik.zapisnik import Zapisnik
 
 def home(request, template="zapisnik/home.html"):
-    return direct_to_template(request, template, {})
+    zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
+    articles = zapisnik.get_published_articles()
+    return direct_to_template(request, template, {
+        'articles' : articles
+    })
 
 @commit_on_success
 def new(request, template="zapisnik/new.html"):
@@ -94,4 +98,29 @@ def preview(request, zapisek_id, template="zapisnik/preview.html"):
 
     return direct_to_template(request, template, {
         'article' : article
+    })
+
+def publish(request, zapisek_id, template="zapisnik/publish.html"):
+    zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
+    try:
+        article = zapisnik.get_article(pk=zapisek_id)
+    except Article.DoesNotExists:
+        raise Http404
+
+    publish_form = None
+
+    if request.method == "POST":
+        publish_form = PublishForm(request.POST)
+        if publish_form.is_valid():
+            zapisnik.publish_article(article=article, categories=publish_form.cleaned_data['categories'])
+
+            #FIXME: Should lead to published article, to absolute url?
+            return HttpResponseRedirect(reverse("zapisnik-home"))
+
+    if not publish_form:
+        publish_form = PublishForm()
+
+    return direct_to_template(request, template, {
+        'article' : article,
+        'publish_form' : publish_form,
     })

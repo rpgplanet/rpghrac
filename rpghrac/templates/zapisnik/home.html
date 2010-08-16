@@ -9,7 +9,10 @@
     <p><a href="/zapisnik/dilna/">Dílna</a></p>
 {% endif %}
 
-
-<p>Zápisník je ve fázi budování ,)</p>
+<ul>
+{% for article in articles %}
+    <li>{{ article }}</li>
+{% endfor %}
+</ul>
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
@@ -13,6 +14,10 @@ from tagging.models import Tag
 
 TEXT_PROCESSOR = u'czechtile'
 WORKING_CATEGORY = u'Dílna'
+
+def get_player_categories_as_choices():
+    return [(i['slug'], i['title']) for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES]
+
 
 class Zapisnik(object):
     def __init__(self, owner, visitor=None, site=None):
@@ -69,6 +74,12 @@ class Zapisnik(object):
             category = self.workshop_category
         )
 
+    def get_published_articles(self):
+        return Article.objects.filter(
+            authors = self.site_author,
+            publish_from__lte = datetime.now()
+        )
+
     def create_article_draft(self, annotation, title, content, tags):
         category = self.workshop_category
 
@@ -101,3 +112,20 @@ class Zapisnik(object):
         )
 
         return article
+
+    def publish_article(self, article, categories):
+        ##### FIXME: This is mockup and shall be fixed with test
+        for category in categories:
+            category_dict = [i for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES if i['slug'] == category][0]
+            Placement.objects.create(
+                publishable = article.publishable_ptr,
+                slug = article.slug,
+                publish_from = datetime.now(),
+                category = Category.objects.get_or_create(
+                    site = self.site,
+                    tree_path = category_dict['tree_path'],
+                    tree_parent = self.root_category,
+                    title = category_dict['title'],
+                    slug = category_dict['slug']
+                )[0]
+            )

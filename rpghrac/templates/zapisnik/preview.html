@@ -1,0 +1,17 @@
+{% extends "zapisnik/main.html" %}
+
+{% block content %}
+
+<h1>Náhled zápisku <a href="{% url zapisnik-edit article.pk %}" title="Přejít na editaci">{{ article.title }}</a></h1>
+
+{% autoescape off %}
+
+<em>{{ article.description }}</em>
+
+{{ article.content.content }}
+
+{% endautoescape %}
+
+<p><a href="{% url zapisnik-edit article.pk %}" title="Přejít na editaci">Přejít na editaci</a> a nebo <a href="{% url zapisnik-publish article.pk %}" title="Publikovat">uveřejnit</a></p>
+
+{% endblock %}
