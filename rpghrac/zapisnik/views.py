@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.db.transaction import commit_on_success
 from django.http import HttpResponseRedirect
@@ -73,6 +74,7 @@ def edit(request, zapisek, template="zapisnik/edit.html"):
 
     return direct_to_template(request, template, {
         'article_form' : article_form,
+        'article' : article
     })
 
 def workshop(request, template="zapisnik/workshop.html"):
@@ -81,4 +83,15 @@ def workshop(request, template="zapisnik/workshop.html"):
 
     return direct_to_template(request, template, {
         'articles' : articles
+    })
+
+def preview(request, zapisek_id, template="zapisnik/preview.html"):
+    zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
+    try:
+        article = zapisnik.get_article(pk=zapisek_id)
+    except Article.DoesNotExists:
+        raise Http404
+
+    return direct_to_template(request, template, {
+        'article' : article
     })

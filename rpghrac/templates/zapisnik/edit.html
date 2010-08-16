@@ -2,15 +2,14 @@
 
 {% block content %}
 
-<h1>Nový zápisek</h1>
+<h1>Editace zápisku</h1>
+<p><a href="{% url zapisnik-preview article.pk %}">Přejít na náhled</a>.</p>
 
 <form method="post">
 
 {{ article_form.as_ul }}
 
-<p>Nový zápisek bude automaticky přidán do Dílny.</p>
-
-<input type="submit" value="Přídat" />
+<input type="submit" value="Uložit" />
 
 </form>
 

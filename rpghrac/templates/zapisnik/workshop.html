@@ -7,7 +7,7 @@
 
 <ul>
 {% for article in articles %}
-    <li><a href="{% url zapisnik-edit article.pk %}">{{ article.title }} {{ article.main_placement }}</a></li>
+    <li><a href="{% url zapisnik-edit article.pk %}">{{ article.title }} umístěný v kategorii {{ article.main_placement.category }}</a> (<a href="{% url zapisnik-preview article.pk %}">náhled</a>)</li>
 {% endfor %}
 </ul>
 {% endblock %}

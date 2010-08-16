@@ -62,6 +62,13 @@ class Zapisnik(object):
             category = self.workshop_category
         )
 
+    def get_article(self, pk):
+        return Article.objects.get(
+            pk = pk,
+            authors = self.site_author,
+            category = self.workshop_category
+        )
+
     def create_article_draft(self, annotation, title, content, tags):
         category = self.workshop_category
 
