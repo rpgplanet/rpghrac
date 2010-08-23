@@ -54,6 +54,7 @@ options(
         project_module = "rpghrac",
     ),
 )
+
 @task
 def freeze_requirements():
     sh('pip freeze -r requirements.txt > freezed-requirements.txt')
