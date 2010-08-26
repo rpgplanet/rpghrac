@@ -1,0 +1,24 @@
+{% extends "page/base.html" %}
+
+{% block title %}
+{{ category.title }}
+{% endblock %}
+
+{% block customhead %}
+    <link rel="alternate" href="{% url feeds "rss" %}" type="application/rss+xml" title="{{ category.title }} feed" />
+{% endblock %}
+
+
+{% block content %}
+<h1>{{ category.title }}</h1>
+<p>{{ category.description }}</p>
+
+{% for listing in listings %}
+    <div class="articleintro">
+        <h3><a href="{{ listing.get_absolute_url }}">{{ listing.target.title }}</a></h3>
+        {% autoescape off %}
+        {% render listing.target.description %}
+        {% endautoescape %}
+    </div>
+{% endfor %}
+{% endblock %}

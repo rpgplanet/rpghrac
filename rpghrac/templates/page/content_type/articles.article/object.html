@@ -1,0 +1,17 @@
+{% extends "page/base.html" %}
+
+{% block content %}
+
+<h1>{{ object.title }}</h1>
+
+{% autoescape off %}
+
+{% render object.description %}
+
+{% render object.get_text %}
+
+{% endautoescape %}
+
+<p class="publishedon">Zveřejněno {{ placement.publish_from|date:"d. m. Y" }}</p>
+
+{% endblock %}
