@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 from os.path import dirname, join, abspath
 from tempfile import gettempdir
@@ -51,6 +53,20 @@ DYNAMIC_RPGPLAYER_CATEGORIES = [
         "parent_tree_path" : "",
         "title" : "RPG",
         "slug" : "rpg",
+    },
+    {
+        "tree_path" : "rpg/draci-doupe",
+        "parent_tree_path" : "rpg",
+        "title" : "Dračí Doupě",
+        "slug" : "draci-doupe",
+    },
+
+
+    {
+        "tree_path" : "rpg/drd2",
+        "parent_tree_path" : "rpg",
+        "title" : "Dračí Doupě II",
+        "slug" : "draci-doupe-2",
     },
 ]
 

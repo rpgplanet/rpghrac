@@ -35,5 +35,3 @@ SECRET_KEY = '88b-01f^x4lh$-s5-hdccnicekg07)niir2g6)93!0#k(=mfv$'
 # we want to reset whole cache in test
 # until we do that, don't use cache
 CACHE_BACKEND = 'dummy://'
-
-

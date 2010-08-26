@@ -6,8 +6,10 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template.defaultfilters import slugify
 
-from ella.core.models.main import Category, Author
-from ella.core.models.publishable import Placement, PUBLISH_FROM_WHEN_EMPTY
+from ella.core.models import (
+    Category, Author,
+    Listing, Placement, PUBLISH_FROM_WHEN_EMPTY
+)
 from ella.articles.models import Article, ArticleContents
 
 from tagging.models import Tag
@@ -117,7 +119,7 @@ class Zapisnik(object):
         ##### FIXME: This is mockup and shall be fixed with test
         for category in categories:
             category_dict = [i for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES if i['slug'] == category][0]
-            Placement.objects.create(
+            placement = Placement.objects.create(
                 publishable = article.publishable_ptr,
                 slug = article.slug,
                 publish_from = datetime.now(),
@@ -128,4 +130,10 @@ class Zapisnik(object):
                     title = category_dict['title'],
                     slug = category_dict['slug']
                 )[0]
+            )
+
+            Listing.objects.create(
+                placement = placement,
+                category = placement.category,
+                publish_from = placement.publish_from,
             )
