@@ -36,7 +36,8 @@ class TestArticleManipulation(DatabaseTestCase):
             "slug" : "rpg",
         },
     ])
-    def test_article_published_by_update(self):
+
+    def test_article_appears_in_proper_listing(self):
         self.zapisnik.publish_article(article=self.article, categories=["rpg"])
 
         # if we take published articles now, we shall find ourselves there
@@ -53,5 +54,76 @@ class TestArticleManipulation(DatabaseTestCase):
 
         self.assert_equals(self.article.publishable_ptr, listings[0].target)
 
-        
+    @mock_settings("DYNAMIC_RPGPLAYER_CATEGORIES", [
+        {
+            "tree_path" : "rpg",
+            "parent_tree_path" : "",
+            "title" : "RPG",
+            "slug" : "rpg",
+        },
+        {
+            "tree_path" : "rpg/drd",
+            "parent_tree_path" : "rpg",
+            "title" : "Dračí Doupě",
+            "slug" : "drd",
+        },
+    ])
+    def test_article_can_be_republished(self):
+        self.zapisnik.publish_article(article=self.article, categories=["rpg"])
+        self.zapisnik.publish_article(article=self.article, categories=["drd"])
 
+        # if we take published articles now, we shall find ourselves there
+        rpg_cat = Category.objects.get(
+            site = self.user.get_profile().site,
+            tree_path = "rpg"
+        )
+
+        drd_cat = Category.objects.get(
+            site = self.user.get_profile().site,
+            tree_path = "rpg/drd"
+        )
+
+        listings = Listing.objects.filter(
+            category = drd_cat
+        )
+
+        # we are in drd
+        self.assert_equals(1, len(listings))
+        self.assert_equals(self.article.publishable_ptr, listings[0].target)
+
+        # but not in rpg anymore
+        self.assert_equals(0, len(Listing.objects.filter(category=rpg_cat)))
+
+
+    @mock_settings("DYNAMIC_RPGPLAYER_CATEGORIES", [
+        {
+            "tree_path" : "rpg",
+            "parent_tree_path" : "",
+            "title" : "RPG",
+            "slug" : "rpg",
+        },
+        {
+            "tree_path" : "rpg/drd",
+            "parent_tree_path" : "rpg",
+            "title" : "Dračí Doupě",
+            "slug" : "drd",
+        },
+    ])
+    def test_article_can_be_republished_in_same_category_too(self):
+        self.zapisnik.publish_article(article=self.article, categories=["rpg"])
+        self.zapisnik.publish_article(article=self.article, categories=["drd", "rpg"])
+
+        # if we take published articles now, we shall find ourselves there
+        rpg_cat = Category.objects.get(
+            site = self.user.get_profile().site,
+            tree_path = "rpg"
+        )
+
+        drd_cat = Category.objects.get(
+            site = self.user.get_profile().site,
+            tree_path = "rpg/drd"
+        )
+
+        # we are in drd
+        self.assert_equals(1, len(Listing.objects.filter(category = drd_cat)))
+        self.assert_equals(1, len(Listing.objects.filter(category=rpg_cat)))
