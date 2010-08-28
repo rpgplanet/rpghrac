@@ -54,10 +54,10 @@
           </div>
           <div class="s-selections-main">
             <div class="s-selection-sort">
-              <a href="#"><img src="{{ STATIC_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;<a href="">DOKONČENÉ</a>
+              <a href="#"><img src="{{ STATIC_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;KATEGORIE
             </div>
             <div class="s-selection-content">
-              <p>ČLÁNKY</p>
+              <p>ČLÁNKY {{ root_category }} {{ root_category.tree_parent }}</p>
             </div>
             <div class="s-selection-sort">
               <a href="#"><img src="{{ STATIC_URL }}img/buttons/s-selection-sort-minus.gif" alt="skrýt" /></a>&nbsp;<a href="">ROZPRACOVANÉ</a>
