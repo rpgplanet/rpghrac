@@ -8,3 +8,14 @@ def home(request):
 
 def register(request):
     return direct_to_template(request, "register.html", {})
+
+def logout(request):
+    from rpgcommon.user.user import logout, fb_logout
+
+    logout(request=request)
+
+    response = direct_to_template(request, "logout.html", {})
+
+    fb_logout(cookies=request.COOKIES, response=response)
+
+    return response

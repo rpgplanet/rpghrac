@@ -46,10 +46,19 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     "django.middleware.transaction.TransactionMiddleware",
 
+    'rpgcommon.user.middleware.FbAutoLoginMiddleware',
+
     'rpghrac.rpgplayer.middleware.SetDomainOwnerMiddleware'
+
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'rpgcommon.user.backends.FacebookBackend',
 )
 

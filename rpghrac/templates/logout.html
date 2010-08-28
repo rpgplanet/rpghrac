@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<h1>Odhlášení</h1>
+
+<p>Byli jste úspěšně odhlášeni. <a href="{% url rpgplayer-login %}">Chcete se znovu přihlásit?</a></p>
+<h2>Facebook</h2>
+<div id="fb-form-wrapper">
+    <fb:login-button></fb:login-button>
+</div>
+
+<div id="fb-root"></div>
+<script>
+
+  window.fbAsyncInit = function() {
+    FB.init({
+            appId: {{ facebook_application_id }},
+            status: true,
+            cookie: true,
+            xfbml: true
+    });
+
+    FB.getLoginStatus(function(response) {
+//      if (response.session) {
+//        // user logged in Facebook, show im registration form and hide fb login button
+//        document.getElementById('fb_form_wrapper').style.display = '';
+//        document.getElementsByTagName('fb:login-button')[0].style.display = 'none';
+//      } else {
+//          // not yet, show him form after login
+//          FB.Event.subscribe('auth.login', function(response) {
+//              // on successfull registration, show form to complete it
+//              document.getElementById('fb_form_wrapper').style.display = '';
+//              document.getElementsByTagName('fb:login-button')[0].style.display = 'none';
+//          });
+//      }
+    });
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/cs_CZ/all.js';
+    e.async = true;
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+{% endblock %}
+
+
+

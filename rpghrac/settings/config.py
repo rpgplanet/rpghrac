@@ -14,6 +14,8 @@ TEST_DATABASE_NAME="test_rpghrac"
 
 SECRET_KEY = 'tlucebubenicektlucenabuben$$$<333changemeasdocumented'
 
+FACEBOOK_APPLICATION_ID = "137786606258153"
+
 # we want to reset whole cache in test
 # until we do that, don't use cache
 CACHE_BACKEND = 'dummy://'
@@ -30,11 +32,6 @@ MAIN_SUBDOMAIN = 'www'
 STATIC_ROOT = abspath(join(dirname(rpghrac.__file__), "static"))
 
 STATIC_URL = "/static/"
-
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-)
-
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,

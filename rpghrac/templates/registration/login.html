@@ -12,13 +12,34 @@
 </ul>
 </form>
 
-<h1>Registrace</h1>
-{% comment %}
-<p>Jste tu noví? <a href="{% url rpgplayer-register %}">Přidejte se k nám.</a></p>
-{% endcomment %}
+<h2>Facebook</h2>
+<fb:login-button perms="email"></fb:login-button>
 
-<h2>OpenID</h2>
-<p>Máte účet na seznamu, googlu nebo facebooku a nechcete <i>další</i> heslo? Přihlašte se přes svou oblíbenou službu.</p>
-<p>TODO</p>
+<div id="fb-root"></div>
+<script>
+
+  window.fbAsyncInit = function() {
+    FB.init({
+            appId: {{ facebook_application_id }},
+            status: true,
+            cookie: true,
+            xfbml: true
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.session) {
+          // hide login button
+      } else {
+      }
+    });
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/cs_CZ/all.js';
+    e.async = true;
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
 
 {% endblock %}

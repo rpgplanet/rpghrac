@@ -4,12 +4,10 @@ import django
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
-from django.contrib.auth.views import login
 
 import ella
 from ella import newman
 
-from rpgplayer.views.home import home, register
 from rpghrac.zapisnik import urls
 
 admin.autodiscover()
@@ -27,11 +25,15 @@ js_info_dict = {
     'packages': ('ella.newman',),
 }
 
+from rpgplayer.views.home import home, logout
+from django.contrib.auth.views import login
+
 urlpatterns = patterns('',
     # true root is from rpgplayer
     url( r'^$', home, name="root_homepage" ),
 
     url(r'^prihlas/$', login, name="rpgplayer-login"),
+    url(r'^odhlas/$', logout, name="rpgplayer-logout"),
 #    url(r'^register/$', register, name="rpgplayer-register" ),
 
     url('^zapisnik/', include(urls)),

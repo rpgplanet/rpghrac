@@ -13,17 +13,17 @@ def site_owner(request):
 
     root_category = None
 
-    try:
-        from django.conf import settings
-        from django.contrib.sites.models import Site
-        from ella.core.models import Category
-        
-        root_category = Category.objects.get(
-            site = Site.objects.get(pk=settings.SITE_ID),
-            tree_parent = None
-        )
-    except:
-        raise
+#    try:
+#        from django.conf import settings
+#        from django.contrib.sites.models import Site
+#        from ella.core.models import Category
+#
+#        root_category = Category.objects.get(
+#            site = Site.objects.get(pk=settings.SITE_ID),
+#            tree_parent = None
+#        )
+#    except:
+#        raise
 
     return {
         'site_owner' : request.site_owner,
