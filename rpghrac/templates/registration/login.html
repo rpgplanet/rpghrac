@@ -28,8 +28,7 @@
 
     FB.getLoginStatus(function(response) {
       if (response.session) {
-          // hide login button
-      } else {
+          location.replace("/");
       }
     });
   };
