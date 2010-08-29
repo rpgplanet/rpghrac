@@ -37,33 +37,3 @@ DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
 
-
-DYNAMIC_RPGPLAYER_CATEGORIES = [
-#    {
-#        "tree_path" : "",
-#        "parent_tree_path" : "",
-#        "title" : "",
-#        "slug" : "",
-#    },
-    {
-        "tree_path" : "rpg",
-        "parent_tree_path" : "",
-        "title" : "RPG",
-        "slug" : "rpg",
-    },
-    {
-        "tree_path" : "rpg/draci-doupe",
-        "parent_tree_path" : "rpg",
-        "title" : "Dračí Doupě",
-        "slug" : "draci-doupe",
-    },
-
-
-    {
-        "tree_path" : "rpg/drd2",
-        "parent_tree_path" : "rpg",
-        "title" : "Dračí Doupě II",
-        "slug" : "draci-doupe-2",
-    },
-]
-
