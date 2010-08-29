@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<h1>Nastavení stránky</h1>
+
+<h2>Základní nastavení</h2>
+
+<form action="." method="post">
+	{{ site_form }}
+	<input type="submit" value="Ulož" />
+</form>
+
+{% endblock %}

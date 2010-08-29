@@ -49,7 +49,8 @@ MIDDLEWARE_CLASSES = (
     
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    "django.middleware.transaction.TransactionMiddleware",
+    'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 
     'rpgcommon.user.middleware.FbAutoLoginMiddleware',
 

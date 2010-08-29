@@ -19,3 +19,9 @@ def logout(request):
     fb_logout(cookies=request.COOKIES, response=response)
 
     return response
+
+from django.contrib.auth.views import login as django_login
+
+def login(request):
+    res = django_login(request)
+    return res

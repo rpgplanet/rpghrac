@@ -25,8 +25,8 @@ js_info_dict = {
     'packages': ('ella.newman',),
 }
 
-from rpgplayer.views.home import home, logout
-from django.contrib.auth.views import login
+from rpgplayer.views.home import home, logout, login
+from rpgplayer import settings_urls
 
 urlpatterns = patterns('',
     # true root is from rpgplayer
@@ -35,6 +35,8 @@ urlpatterns = patterns('',
     url(r'^prihlas/$', login, name="rpgplayer-login"),
     url(r'^odhlas/$', logout, name="rpgplayer-logout"),
 #    url(r'^register/$', register, name="rpgplayer-register" ),
+
+    url('^nastaveni/', include(settings_urls)),
 
     url('^zapisnik/', include(urls)),
 
@@ -47,6 +49,8 @@ if settings.DEBUG:
     urlpatterns += patterns('',
         # serve static files
         (r'^%s/(?P<path>.*)$' % settings.STATIC_URL.lstrip('/').rstrip('/'), 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
+        # ...and user-uploaded media
+        (r'^%s/(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/').rstrip('/'), 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     )
 
 
