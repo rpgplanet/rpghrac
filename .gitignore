@@ -1,6 +1,10 @@
 *.py[c|o]
 /rpghrac/settings/local.py
-/setup.py
-
 /tests/*/settings/local.py
+
+/dist
+/freezed-requirements.txt
+/nbproject/
+/pip-log.txt
+*.egg-info
 
