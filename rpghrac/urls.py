@@ -11,7 +11,7 @@ from ella import newman
 from rpghrac.zapisnik import urls
 
 admin.autodiscover()
-newman.autodiscover()
+#newman.autodiscover()
 
 
 #urlpatterns = patterns('',)
