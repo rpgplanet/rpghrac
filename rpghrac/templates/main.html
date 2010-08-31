@@ -4,11 +4,23 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/basic.css" />
     <title>{% block title %}RPG Hráč{% endblock %}</title>
-    <script>
+    <script type="text/javascript">
         document.domain = 'rpghrac.cz';
-    </script>
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', '{{ google_analytics_code }}']);
+          _gaq.push(['_setDomainName', '.rpghrac.cz']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script');
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            ga.setAttribute('async', 'true');
+            document.documentElement.firstChild.appendChild(ga);
+          })();
+     </script>
   </head>
-{% load avatar_tags %}
+    {% load avatar_tags %}
+    
   <body>
 
     <div id="header">
