@@ -4,6 +4,7 @@
 
 <h1>{{ object.title }}</h1>
 
+<div class="article">
 {% autoescape off %}
 
 {% render object.description %}
@@ -11,6 +12,7 @@
 {% render object.get_text %}
 
 {% endautoescape %}
+</div>
 
 <p class="publishedon">Zveřejněno {{ placement.publish_from|date:"d. m. Y" }}</p>
 

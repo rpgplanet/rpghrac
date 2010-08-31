@@ -25,24 +25,24 @@
 
     <div id="header">
       <div id="h-left">
-        <a href="http://rpghrac.cz" title="RPGHrac.cz"><img src="{{ STATIC_URL }}img/rpghrac-logo.gif" class="logo" alt="logo RPGHráče" /></a>
+        <a href="/" title="Domov RPG hráče {{ site_owner.username }}"><img src="{{ STATIC_URL }}img/rpghrac-logo.gif" class="logo" alt="logo RPGHráče" /></a>
         <div id="h-left-tape"></div>
       </div>
       <div id="h-right">
         <div id="h-topmenu">
           <ul>
-          <li><a href="">RPGHRÁČ</a></li>
-          <li><a href="http://rpgplanet.cz" title="">RPGPLANET</a></li>
+          <li><a href="http://rpghrac.cz/">RPGHRÁČ</a></li>
+          <li><a href="http://www.rpgplanet.cz/" title="">RPGPLANET</a></li>
           </ul>
         </div>
 
         <div id="h-userinfo">
           {% if user.is_authenticated %}
-              <h2>{{ user.username }}</h2>
+              <h2 id="username">{{ user.username }}</h2>
               <p class="userinfo-first"><a href="" title="">přípomínky: 0</a> &bull; <a href="" title="">diskuze: 0</a></p>
               <p class="userinfo-second">pošta (0) &bull; <a href="{% url usersettings %}">nastavení</a> &bull; <a href="{% url rpgplayer-logout %}" title="Odhlášení">odhlásit</a></p>
           {% else %}
-              <h2>Poutník s kápí</h2>
+              <h2 id="username">Poutník s kápí</h2>
               <p class="userinfo-first"><a href="{% url rpgplayer-login %}" title="přihlášení/registrace">Poodhal svou tvář</a></p>
           {% endif %}
         </div>
@@ -53,7 +53,7 @@
     <div id="content">
       <div id="sidebar"><div id="sidebar-content">
         <div id="s-name">
-            <p><a href="/" id="menu-owner-name">{{ site_owner.username }}</a></p>
+            <h2><a href="/" id="menu-owner-name">{{ site_owner.username }}</a></h2>
         </div>
         <div id="s-profile">
             {% avatar site_owner 50 %}
