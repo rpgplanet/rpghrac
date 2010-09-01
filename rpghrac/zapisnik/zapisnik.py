@@ -88,6 +88,44 @@ class Zapisnik(object):
             publish_from__lte = datetime.now()
         )
 
+    def get_category_tree_node(self, categories, actual_path):
+        node = {
+            'category' : categories.pop(categories.index([i for i in categories if i.tree_path == actual_path][0])),
+            'children' : []
+        }
+
+        for child in [i for i in categories if i.tree_parent == node['category']]:
+            node['children'].append(self.get_category_tree_node(categories, child.tree_path))
+
+        return node
+
+    def get_available_categories_as_tree(self):
+        #TODO: This is stupid, hotbaked-after-midnight way, shall be refactored
+
+        categories = Category.objects.filter(site=self.site)
+        paths = [i.tree_path for i in categories]
+        unused = []
+        for category_dict in settings.DYNAMIC_RPGPLAYER_CATEGORIES:
+            if category_dict['parent_tree_path'] not in paths:
+                if category_dict['parent_tree_path'] in paths:
+                    parent = [i for i in categories if i.tree_path == category_dict['parent_tree_path']][0]
+                else:
+                    parent = [i for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES if i['tree_path'] == category_dict['parent_tree_path']][0]
+
+                unused.append(Category(
+                    site = self.site,
+                    tree_path = category_dict['tree_path'],
+                    tree_parent = parent,
+                    title = category_dict['title'],
+                    slug = category_dict['slug']
+                ))
+
+        categories = list(categories)
+        categories.extend(unused)
+
+        #FIXME: why path as string and not as object?
+        return self.get_category_tree_node(categories, actual_path="")
+
     def create_article_draft(self, annotation, title, content, tags):
         category = self.workshop_category
 
