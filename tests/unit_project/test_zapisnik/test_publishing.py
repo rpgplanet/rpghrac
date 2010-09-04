@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-Check we're playing nicely with our version of django-markup
-"""
-
 from djangosanetesting import DatabaseTestCase
 from djangosanetesting.utils import mock_settings
 

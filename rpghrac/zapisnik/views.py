@@ -56,7 +56,7 @@ def edit(request, zapisek, template="zapisnik/edit.html"):
         article_form = ArticleForm(request.POST)
         
         if article_form.is_valid():
-            article.description = article_form.cleaned_data['annotation']
+            article.djangomarkup_description = article_form.cleaned_data['annotation']
             article.title = article_form.cleaned_data['title']
             article.tags = article_form.cleaned_data['tags']
 
@@ -70,7 +70,7 @@ def edit(request, zapisek, template="zapisnik/edit.html"):
 
     if not article_form:
         article_form = ArticleForm({
-            "annotation" : article.description,
+            "annotation" : article.djangomarkup_description,
             "title" : article.title,
             "content" : article.content.djangomarkup_content,
             "tags" : ', '.join([tag.name for tag in article.tags])
