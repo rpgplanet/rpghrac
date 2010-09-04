@@ -16,7 +16,6 @@ from ella.articles.models import Article, ArticleContents
 from tagging.models import Tag
 
 TEXT_PROCESSOR = u'czechtile'
-WORKING_CATEGORY = u'Dílna'
 
 def get_player_categories_as_choices():
     return [(i['slug'], i['title']) for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES]
@@ -52,16 +51,6 @@ class Zapisnik(object):
         return self._root_category
 
     @property
-    def workshop_category(self):
-        return Category.objects.get_or_create(
-            site = self.site,
-            tree_path = "dilna",
-            tree_parent = self.root_category,
-            title = WORKING_CATEGORY,
-            slug = slugify(WORKING_CATEGORY)
-        )[0]
-
-    @property
     def site_author(self):
         return Author.objects.get_or_create(
             user = self.owner,
@@ -70,16 +59,16 @@ class Zapisnik(object):
         )[0]
 
     def get_drafts(self):
+        # drafts are articles that has no placement
         return Article.objects.filter(
             authors = self.site_author,
-            category = self.workshop_category
+            publishable_ptr__placement = None
         )
 
     def get_article(self, pk):
         return Article.objects.get(
             pk = pk,
-            authors = self.site_author,
-            category = self.workshop_category
+            authors = self.site_author
         )
 
     def get_published_articles(self):
@@ -127,7 +116,7 @@ class Zapisnik(object):
         return self.get_category_tree_node(categories, actual_path="")
 
     def create_article_draft(self, annotation, title, content, tags):
-        category = self.workshop_category
+        category = self.root_category
 
         article = Article.objects.create(
             # updated = datetime.now()
@@ -149,13 +138,6 @@ class Zapisnik(object):
         acontent.save()
 
         Tag.objects.update_tags(article, tags)
-
-        Placement.objects.create(
-            publishable = article.publishable_ptr,
-            category = category,
-            slug = article.slug,
-            publish_from = PUBLISH_FROM_WHEN_EMPTY
-        )
 
         return article
 

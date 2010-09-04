@@ -14,9 +14,7 @@ from rpghrac.zapisnik.zapisnik import Zapisnik
 
 class TestArticleManipulation(DatabaseTestCase):
 
-    def setUp(self):
-        super(TestArticleManipulation, self).setUp()
-
+    def prepare(self):
         self.user = create_user("tester", "xxx", "tester@example.com")
         self.zapisnik = Zapisnik(site=self.user.get_profile().site, owner=self.user, visitor=self.user)
         self.article = self.zapisnik.create_article_draft(
@@ -38,6 +36,7 @@ class TestArticleManipulation(DatabaseTestCase):
     ])
 
     def test_article_appears_in_proper_listing(self):
+        self.prepare()
         self.zapisnik.publish_article(article=self.article, categories=["rpg"])
 
         # if we take published articles now, we shall find ourselves there
@@ -69,6 +68,7 @@ class TestArticleManipulation(DatabaseTestCase):
         },
     ])
     def test_article_can_be_republished(self):
+        self.prepare()
         self.zapisnik.publish_article(article=self.article, categories=["rpg"])
         self.zapisnik.publish_article(article=self.article, categories=["drd"])
 
@@ -110,6 +110,7 @@ class TestArticleManipulation(DatabaseTestCase):
         },
     ])
     def test_article_can_be_republished_in_same_category_too(self):
+        self.prepare()
         self.zapisnik.publish_article(article=self.article, categories=["rpg"])
         self.zapisnik.publish_article(article=self.article, categories=["drd", "rpg"])
 
@@ -127,3 +128,28 @@ class TestArticleManipulation(DatabaseTestCase):
         # we are in drd
         self.assert_equals(1, len(Listing.objects.filter(category = drd_cat)))
         self.assert_equals(1, len(Listing.objects.filter(category=rpg_cat)))
+
+
+    def test_draft_in_drafts(self):
+        self.prepare()
+
+        self.assert_equals(1, len(self.zapisnik.get_drafts()))
+
+        self.assert_equals(self.article.content, self.zapisnik.get_drafts()[0].content)
+        self.assert_equals(self.article.title, self.zapisnik.get_drafts()[0].title)
+
+
+    @mock_settings("DYNAMIC_RPGPLAYER_CATEGORIES", [
+        {
+            "tree_path" : "rpg",
+            "parent_tree_path" : "",
+            "title" : "RPG",
+            "slug" : "rpg",
+        },
+    ])
+    def test_published_articles_not_in_draft(self):
+        self.prepare()
+
+        self.zapisnik.publish_article(article=self.article, categories=["rpg"])
+
+        self.assert_equals(0, len(self.zapisnik.get_drafts()))

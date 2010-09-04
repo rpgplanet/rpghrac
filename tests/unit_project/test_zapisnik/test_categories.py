@@ -8,7 +8,7 @@ from rpghrac.zapisnik.zapisnik import Zapisnik
 
 class TestCategoryHandling(DatabaseTestCase):
 
-    # cannot be in setUp because it depends on categories
+    # cannot be in setUp because it depends on categories that are mocked on per-case bases
     def prepare(self):
         self.user = create_user("tester", "xxx", "tester@example.com")
         self.zapisnik = Zapisnik(site=self.user.get_profile().site, owner=self.user, visitor=self.user)
@@ -32,9 +32,7 @@ class TestCategoryHandling(DatabaseTestCase):
         root = self.zapisnik.get_available_categories_as_tree()
 
         self.assert_equals("", root['category'].tree_path)
-        self.assert_equals(2, len(root['children']))
-        #FIXME: We should not have it, see bug #50
-        self.assert_equals(u"Dílna", root['children'][0]['category'].title)
+        self.assert_equals(1, len(root['children']))
+        self.assert_equals("RPG", root['children'][0]['category'].title)
 
-        self.assert_equals("RPG", root['children'][1]['category'].title)
 
