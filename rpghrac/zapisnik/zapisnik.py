@@ -17,10 +17,6 @@ from tagging.models import Tag
 
 TEXT_PROCESSOR = u'czechtile'
 
-def get_player_categories_as_choices():
-    return [(i['slug'], i['title']) for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES]
-
-
 class Zapisnik(object):
     def __init__(self, owner, visitor=None, site=None):
         super(Zapisnik, self).__init__()
@@ -77,43 +73,44 @@ class Zapisnik(object):
             publish_from__lte = datetime.now()
         )
 
-    def get_category_tree_node(self, categories, actual_path):
+    def get_category_tree_node(self, categories, actual_node):
+
         node = {
-            'category' : categories.pop(categories.index([i for i in categories if i.tree_path == actual_path][0])),
+            'category' : actual_node,
             'children' : []
         }
 
-        for child in [i for i in categories if i.tree_parent == node['category']]:
-            node['children'].append(self.get_category_tree_node(categories, child.tree_path))
+        del categories[categories.index(actual_node)]
+
+        children = [i for i in categories if i.tree_parent.tree_path == actual_node.tree_path]
+
+        for child in children:
+            node['children'].append(self.get_category_tree_node(categories, child))
 
         return node
 
     def get_available_categories_as_tree(self):
-        #TODO: This is stupid, hotbaked-after-midnight way, shall be refactored
+        paths = dict([(i.tree_path, i) for i in Category.objects.filter(site=self.site)])
 
-        categories = Category.objects.filter(site=self.site)
-        paths = [i.tree_path for i in categories]
-        unused = []
+        # root is always available, so we can depend on exitence of parent
+        self.root_category
+        
         for category_dict in settings.DYNAMIC_RPGPLAYER_CATEGORIES:
-            if category_dict['parent_tree_path'] not in paths:
-                if category_dict['parent_tree_path'] in paths:
-                    parent = [i for i in categories if i.tree_path == category_dict['parent_tree_path']][0]
-                else:
-                    parent = [i for i in settings.DYNAMIC_RPGPLAYER_CATEGORIES if i['tree_path'] == category_dict['parent_tree_path']][0]
+            if category_dict['tree_path'] not in paths:
+                parent = paths[category_dict['parent_tree_path']]
 
-                unused.append(Category(
+                paths[category_dict['tree_path']] = Category(
                     site = self.site,
                     tree_path = category_dict['tree_path'],
                     tree_parent = parent,
                     title = category_dict['title'],
                     slug = category_dict['slug']
-                ))
+                )
 
-        categories = list(categories)
-        categories.extend(unused)
+        categories = paths.values()
 
         #FIXME: why path as string and not as object?
-        return self.get_category_tree_node(categories, actual_path="")
+        return self.get_category_tree_node(categories, actual_node=self.root_category)
 
     def create_article_draft(self, annotation, title, content, tags):
         category = self.root_category

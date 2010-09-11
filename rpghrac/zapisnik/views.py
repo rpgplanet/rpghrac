@@ -110,7 +110,7 @@ def publish(request, zapisek_id, template="zapisnik/publish.html"):
     publish_form = None
 
     if request.method == "POST":
-        publish_form = PublishForm(request.POST)
+        publish_form = PublishForm(request.POST, categories_tree = zapisnik.get_available_categories_as_tree())
         if publish_form.is_valid():
             zapisnik.publish_article(article=article, categories=publish_form.cleaned_data['categories'])
 
@@ -118,9 +118,17 @@ def publish(request, zapisek_id, template="zapisnik/publish.html"):
             return HttpResponseRedirect(reverse("zapisnik-home"))
 
     if not publish_form:
-        publish_form = PublishForm()
+        publish_form = PublishForm(categories_tree = zapisnik.get_available_categories_as_tree())
 
     return direct_to_template(request, template, {
         'article' : article,
         'publish_form' : publish_form,
+    })
+
+# only list categories
+def categories(request, template="zapisnik/categories.html"):
+    zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
+    categories = zapisnik.get_available_categories_as_tree()
+    return direct_to_template(request, template, {
+        'categories' : categories,
     })

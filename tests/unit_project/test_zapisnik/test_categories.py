@@ -36,3 +36,26 @@ class TestCategoryHandling(DatabaseTestCase):
         self.assert_equals("RPG", root['children'][0]['category'].title)
 
 
+    @mock_settings("DYNAMIC_RPGPLAYER_CATEGORIES", [
+        {
+            "tree_path" : "rpg",
+            "parent_tree_path" : "",
+            "title" : "RPG",
+            "slug" : "rpg",
+        },
+        {
+            "tree_path" : "rpg/wtf",
+            "parent_tree_path" : "rpg",
+            "title" : "WTF",
+            "slug" : "wtf",
+        },
+    ])
+    def test_nested_tree_category_listing(self):
+        self.prepare()
+        root = self.zapisnik.get_available_categories_as_tree()
+
+        self.assert_equals("rpg", root['children'][0]['category'].tree_path)
+        self.assert_equals(1, len(root['children'][0]['children']))
+        self.assert_equals("WTF", root['children'][0]['children'][0]['category'].title)
+
+
