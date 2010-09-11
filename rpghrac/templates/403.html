@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1>Sem nesmíš!</h1>
+
+{% if not user.is_authenticated %}
+
+<p>První dobrý krok je <a href="{% url rpgplayer-login %}">zkusit se přihlásit</a>.</p>
+
+{% else %}
+
+<p>Možná jsi tu omylem, ale to tě neomlouvá.</p>
+<p>Šmírovat není pěkné.</p>
+
+{% endif %}
+
+{% endblock %}

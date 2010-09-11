@@ -7,6 +7,8 @@ from django.views.generic.simple import direct_to_template
 from ella.core.models.main import Category, Author, Source
 from ella.articles.models import Article, ArticleContents
 
+from rpghrac.rpgplayer.utils import owner_required
+
 from rpghrac.zapisnik.forms import ArticleForm, PublishForm
 from rpghrac.zapisnik.zapisnik import Zapisnik
 
@@ -18,6 +20,7 @@ def home(request, template="zapisnik/home.html"):
     })
 
 @commit_on_success
+@owner_required
 def new(request, template="zapisnik/new.html"):
     article_form = None
 
@@ -45,6 +48,7 @@ def new(request, template="zapisnik/new.html"):
 
 
 @commit_on_success
+@owner_required
 def edit(request, zapisek, template="zapisnik/edit.html"):
     article_form = None
 
@@ -81,6 +85,7 @@ def edit(request, zapisek, template="zapisnik/edit.html"):
         'article' : article
     })
 
+@owner_required
 def workshop(request, template="zapisnik/workshop.html"):
     zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
     articles = zapisnik.get_drafts()
@@ -89,6 +94,7 @@ def workshop(request, template="zapisnik/workshop.html"):
         'articles' : articles
     })
 
+@owner_required
 def preview(request, zapisek_id, template="zapisnik/preview.html"):
     zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
     try:
@@ -100,6 +106,7 @@ def preview(request, zapisek_id, template="zapisnik/preview.html"):
         'article' : article
     })
 
+@owner_required
 def publish(request, zapisek_id, template="zapisnik/publish.html"):
     zapisnik = Zapisnik(site=request.site, owner=request.site_owner, visitor=request.user)
     try:
