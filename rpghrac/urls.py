@@ -34,7 +34,7 @@ urlpatterns = patterns('',
     # true root is from rpgplayer
     url( r'^$', home, name="root_homepage" ),
 
-    url(r'^prihlas/$', login, name="rpgplayer-login"),
+    url(r'^prihlaseni/$', login, name="rpgplayer-login"),
     url(r'^odhlas/$', logout, name="rpgplayer-logout"),
 #    url(r'^register/$', register, name="rpgplayer-register" ),
 
