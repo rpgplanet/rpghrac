@@ -25,7 +25,9 @@ js_info_dict = {
     'packages': ('ella.newman',),
 }
 
-from rpgplayer.views.home import home, logout, login
+from rpgcommon.user.views import login, logout
+
+from rpghrac.rpgplayer.views.home import home
 from rpgplayer import settings_urls
 
 urlpatterns = patterns('',
