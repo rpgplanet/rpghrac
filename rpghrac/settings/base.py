@@ -58,8 +58,3 @@ MIDDLEWARE_CLASSES = (
 
 )
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'rpgcommon.user.backends.FacebookBackend',
-)
-
