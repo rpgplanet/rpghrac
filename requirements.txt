@@ -5,14 +5,14 @@ html5lib
 anyjson
 south > 0.7
 
-git+http://github.com/Almad/python-czechtile.git#egg=czechtile
+git+https://github.com/Almad/python-czechtile.git#egg=czechtile
 
-git+http://github.com/rpgplanet/django-markup.git#egg=djangomarkup
+git+https://github.com/rpgplanet/django-markup.git#egg=djangomarkup
 
-git+http://github.com/rpgplanet/ella.git#egg=ella
-git+http://github.com/rpgplanet/django-avatar.git#egg=avatar
+git+https://github.com/rpgplanet/ella.git#egg=ella
+git+https://github.com/rpgplanet/django-avatar.git#egg=avatar
 
 nose
-git+http://github.com/Almad/django-sane-testing.git#egg=djangosanetesting
+git+https://github.com/Almad/django-sane-testing.git#egg=djangosanetesting
 lxml
 
