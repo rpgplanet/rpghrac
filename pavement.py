@@ -56,16 +56,6 @@ options(
 )
 
 @task
-def freeze_requirements():
-    sh('pip freeze -r requirements.txt > freezed-requirements.txt')
-    
-
-@task
-@needs('freeze_requirements', 'setuptools.command.sdist')
-def sdist():
-    """ Custom sdist """
-
-@task
 def deploy_production():
     """ Deploy to production server """
     sh('fab deploy')
