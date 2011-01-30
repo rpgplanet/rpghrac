@@ -101,5 +101,27 @@
     <div id="footer">
         <p>&copy; Vývojáři RPGPlanet a jednotliví uživatelé, vizte <a href="http://www.rpgplanet.cz/podminky-uziti">Podmínky užití</a>.</p>
     </div>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/mootools-1.3-core.js"></script>
+    {% block extra_js %}{% endblock %}
+    <!-- TODO: Move to a more appropriate place -->
+    <script type="text/javascript">
+        window.addEvent('domready', function() {
+            var switcher = $$('.czechtile-help .show-less');
+            if (switcher) {
+              switcher.setStyle('display', 'block');
+              switcher.addEvent('click', function() {
+                $$('.czechtile-help .text').setStyle('display', 'none');
+                $$('.czechtile-help .show-more').setStyle('display', 'block');
+                $$('.czechtile-help .show-less').setStyle('display', 'none');
+                $$('.czechtile-help .show-more').addEvent('click', function() {
+                  $$('.czechtile-help .text').setStyle('display', 'block');
+                  $$('.czechtile-help .show-more').setStyle('display', 'none');
+                  $$('.czechtile-help .show-less').setStyle('display', 'block');
+                });
+              });
+            }
+        });
+    </script>
+
  </body>
 </html>
