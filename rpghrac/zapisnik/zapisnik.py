@@ -9,9 +9,18 @@ from django.template.defaultfilters import slugify
 
 from ella.core.models import (
     Category, Author,
-    Listing, Placement, PUBLISH_FROM_WHEN_EMPTY
+    Listing, Placement
 )
 from ella.articles.models import Article, ArticleContents
+
+# yeah, API changes....
+
+try:
+    from ella.core.models import PUBLISH_FROM_WHEN_EMPTY
+except ImportError:
+    from ella.core.conf import core_settings
+    PUBLISH_FROM_WHEN_EMPTY = core_settings.PUBLISH_FROM_WHEN_EMPTY
+
 
 from tagging.models import Tag
 
