@@ -42,9 +42,11 @@
 
         <div id="h-userinfo">
           {% if user.is_authenticated %}
+              {% load postman_tags %}
+              {% postman_unread as unread_count %}
               <h2 id="username">{{ user.username }}</h2>
               <p class="userinfo-first"><a href="" title="">přípomínky: 0</a> &bull; <a href="" title="">diskuze: 0</a></p>
-              <p class="userinfo-second">pošta (0) &bull; <a href="{% url usersettings %}">nastavení</a> &bull; <a href="{% url rpgplayer-logout %}" title="Odhlášení">odhlásit</a></p>
+              <p class="userinfo-second"><a href="{% url postman_inbox %}">pošta</a> {% if unread_count %}(<strong>{{ unread_count }}</strong>){% endif %} &bull; <a href="{% url usersettings %}">nastavení</a> &bull; <a href="{% url rpgplayer-logout %}" title="Odhlášení">odhlásit</a></p>
           {% else %}
               <h2 id="username">Poutník s kápí</h2>
               <p class="userinfo-first"><a href="{% url rpgplayer-login %}" title="přihlášení/registrace">Poodhal svou tvář</a></p>

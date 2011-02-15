@@ -9,6 +9,12 @@ git+git://github.com/Almad/python-czechtile.git#egg=czechtile
 
 git+git://github.com/rpgplanet/django-markup.git#egg=djangomarkup
 
+git+git://github.com/rpgplanet/django-notification.git#egg=notification
+
+django-pagination
+git+git://github.com/rpgplanet/django-postman.git#egg=postman
+
+
 git+git://github.com/rpgplanet/ella.git#egg=ella
 git+git://github.com/rpgplanet/django-avatar.git#egg=avatar
 

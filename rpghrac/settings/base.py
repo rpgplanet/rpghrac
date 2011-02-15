@@ -52,6 +52,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 
+    'pagination.middleware.PaginationMiddleware',
+
     'rpgcommon.user.middleware.FbAutoLoginMiddleware',
 
     'rpghrac.rpgplayer.middleware.SetDomainOwnerMiddleware'
