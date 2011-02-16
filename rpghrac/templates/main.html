@@ -97,7 +97,8 @@
         </div>
       </div></div>
 
-      <div id="main"><div id="main-content">{% block content %}Admin to rozbil, tady má být nějaký obsah. Řekněte mu to prosím, má to rozbitý!{% endblock %}</div></div>
+      <div id="main">{% block postman_menu %}{% endblock %}
+		<div id="main-content">{% block content %}Admin to rozbil, tady má být nějaký obsah. Řekněte mu to prosím, má to rozbitý!{% endblock %}</div></div>
       <hr class="cleaner" />
     </div>
     <div id="footer">
