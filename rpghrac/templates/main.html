@@ -46,7 +46,7 @@
               {% postman_unread as unread_count %}
               <h2 id="username">{{ user.username }}</h2>
               <p class="userinfo-first"><a href="" title="">přípomínky: 0</a> &bull; <a href="" title="">diskuze: 0</a></p>
-              <p class="userinfo-second"><a href="{% url postman_inbox %}">pošta</a> {% if unread_count %}(<strong>{{ unread_count }}</strong>){% endif %} &bull; <a href="{% url usersettings %}">nastavení</a> &bull; <a href="{% url rpgplayer-logout %}" title="Odhlášení">odhlásit</a></p>
+              <p class="userinfo-second"><a href="{% url postman_inbox %}">pošta</a> {% if unread_count %}(<strong>{{ unread_count }}</strong>){% endif %} &bull; <a href="{% url notification_notices %}">upozornění</a> {% if notice_unseen_count %}(<strong>{{ notice_unseen_count }}</strong>){% endif %} &bull; <a href="{% url usersettings %}">nastavení</a> &bull; <a href="{% url rpgplayer-logout %}" title="Odhlášení">odhlásit</a></p>
           {% else %}
               <h2 id="username">Poutník s kápí</h2>
               <p class="userinfo-first"><a href="{% url rpgplayer-login %}" title="přihlášení/registrace">Poodhal svou tvář</a></p>
@@ -64,7 +64,7 @@
         <div id="s-profile">
             {% avatar site_owner 50 %}
           <div id="s-profile-text">
-            <p>profil &bull; napsat zprávu</p>
+            <p>profil &bull; <a href="{% url postman_write site_owner.username %}">napsat zprávu</a></p>
           </div>
         </div>
         <div class="s-selections">
